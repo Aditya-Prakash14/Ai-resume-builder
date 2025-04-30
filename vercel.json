@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm build",
+  "devCommand": "pnpm dev",
+  "installCommand": "pnpm install",
+  "framework": "nextjs",
+  "regions": ["sfo1"],
+  "env": {
+    "NEXT_PUBLIC_SUPABASE_URL": "https://iugftgmpjgavmequpbmt.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1Z2Z0Z21wamdhdm1lcXVwYm10Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU5OTc5MjEsImV4cCI6MjA2MTU3MzkyMX0.Kn1H2TxSHSbDeSEQXomY8ppZiht-qvnPAozt9Mw9R4A"
+  }
+}
