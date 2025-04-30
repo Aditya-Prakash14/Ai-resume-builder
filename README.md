@@ -6,7 +6,7 @@ An intelligent, open-source resume builder powered by AI that helps create and t
 
 ## ✨ Live Demo
 
-Check out the live demo at [resumelm.com](https://resumelm.com)
+Check out the live demo at [ai-resume-builder-adityaprakash.vercel.app](https://ai-resume-builder-adityaprakash.vercel.app)
 
 ## 🌟 Key Features
 
@@ -94,7 +94,7 @@ Check out the live demo at [resumelm.com](https://resumelm.com)
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/olyaiy/resume-lm.git
+git clone https://github.com/Aditya-Prakash14/Ai-resume-builder.git
 ```
 
 2. Install dependencies:
@@ -186,4 +186,4 @@ For more details, see the [full license text](LICENSE).
 
 ---
 
-Built with ❤️ using [Next.js](https://nextjs.org/)
+Built with ❤️ by [Aditya Prakash](https://github.com/Aditya-Prakash14)

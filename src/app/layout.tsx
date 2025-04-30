@@ -10,17 +10,17 @@ import { Analytics } from "@vercel/analytics/react"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://resumelm.com"),
+  metadataBase: new URL("https://ai-resume-builder-adityaprakash.vercel.app"),
   title: {
-    default: "ResumeLM - AI-Powered Resume Builder",
-    template: "%s | ResumeLM"
+    default: "AI Resume Builder by Aditya Prakash",
+    template: "%s | AI Resume Builder"
   },
   description: "Create tailored, ATS-optimized resumes powered by AI. Land your dream tech job with personalized resume optimization.",
-  applicationName: "ResumeLM",
+  applicationName: "AI Resume Builder",
   keywords: ["resume builder", "AI resume", "ATS optimization", "tech jobs", "career tools", "job application"],
-  authors: [{ name: "ResumeLM" }],
-  creator: "ResumeLM",
-  publisher: "ResumeLM",
+  authors: [{ name: "Aditya Prakash" }],
+  creator: "Aditya Prakash",
+  publisher: "Aditya Prakash",
   formatDetection: {
     email: false,
     address: false,
@@ -34,24 +34,24 @@ export const metadata: Metadata = {
   // manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
-    siteName: "ResumeLM",
-    title: "ResumeLM - AI-Powered Resume Builder",
+    siteName: "AI Resume Builder",
+    title: "AI Resume Builder by Aditya Prakash",
     description: "Create tailored, ATS-optimized resumes powered by AI. Land your dream tech job with personalized resume optimization.",
     images: [
       {
         url: "/og.webp",
         width: 1200,
         height: 630,
-        alt: "ResumeLM - AI Resume Builder",
+        alt: "AI Resume Builder by Aditya Prakash",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ResumeLM - AI-Powered Resume Builder",
+    title: "AI Resume Builder by Aditya Prakash",
     description: "Create tailored, ATS-optimized resumes powered by AI. Land your dream tech job with personalized resume optimization.",
     images: ["/og.webp"],
-    creator: "@resumelm",
+    creator: "@adityaprakash",
   },
   robots: {
     index: true,

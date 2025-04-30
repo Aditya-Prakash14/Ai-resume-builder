@@ -44,9 +44,9 @@ export function Logo({ className, asLink = true }: LogoProps) {
       ctx.font = 'bold 128px Inter, system-ui, sans-serif';
       ctx.fillStyle = gradient;
       ctx.textBaseline = 'middle';
-      
+
       // Draw text (centered)
-      const text = 'ResumeLM';
+      const text = 'AI Resume Builder';
       const textMetrics = ctx.measureText(text);
       const x = (800 - textMetrics.width) / 2;
       ctx.fillText(text, x, 100);
@@ -54,7 +54,7 @@ export function Logo({ className, asLink = true }: LogoProps) {
       // Export
       const dataUrl = canvas.toDataURL('image/png');
       const link = document.createElement('a');
-      link.download = 'resumelm-logo.png';
+      link.download = 'ai-resume-builder-logo.png';
       link.href = dataUrl;
       link.click();
     } catch (error) {
@@ -72,13 +72,13 @@ export function Logo({ className, asLink = true }: LogoProps) {
               <stop offset="100%" style="stop-color:#4f46e5"/>
             </linearGradient>
           </defs>
-          <text x="50%" y="50%" fill="url(#logoGradient)" 
-            font-family="Inter, system-ui, sans-serif" 
+          <text x="50%" y="50%" fill="url(#logoGradient)"
+            font-family="Inter, system-ui, sans-serif"
             font-size="128px"
             font-weight="bold"
             text-anchor="middle"
             dominant-baseline="middle">
-            ResumeLM
+            AI Resume Builder
           </text>
         </svg>
       `;
@@ -86,7 +86,7 @@ export function Logo({ className, asLink = true }: LogoProps) {
       const blob = new Blob([svgContent], { type: 'image/svg+xml' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
-      link.download = 'resumelm-logo.svg';
+      link.download = 'ai-resume-builder-logo.svg';
       link.href = url;
       link.click();
       URL.revokeObjectURL(url);
@@ -99,8 +99,8 @@ export function Logo({ className, asLink = true }: LogoProps) {
     <ContextMenu>
       <ContextMenuTrigger>
         <div ref={logoRef} className="transition-transform duration-500 hover:scale-105">
-          <GradientHover className={cn("text-2xl font-bold", className)}>
-            ResumeLM
+          <GradientHover className={cn("text-xl font-bold", className)}>
+            AI Resume Builder
           </GradientHover>
         </div>
       </ContextMenuTrigger>
@@ -126,4 +126,4 @@ export function Logo({ className, asLink = true }: LogoProps) {
   }
 
   return logoContent;
-} 
+}
