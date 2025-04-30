@@ -23,9 +23,11 @@ export async function POST(req: Request) {
   try {
     const { messages, target_role, config, job }: ChatRequest = await req.json();
 
-    // Get subscription plan and user ID
-    const { plan, id } = await getSubscriptionPlan(true);
+    // Get subscription plan
+    const plan = await getSubscriptionPlan();
     const isPro = plan === 'pro';
+    // Use a placeholder ID for rate limiting
+    const id = 'user-id';
 
     // Apply rate limiting only for Pro users
     if (isPro) {
@@ -36,9 +38,9 @@ export async function POST(req: Request) {
         const message = error instanceof Error ? error.message : 'Rate limit exceeded';
         const match = message.match(/(\d+) seconds/);
         const retryAfter = match ? parseInt(match[1], 10) : 60;
-        
+
         return new Response(
-          JSON.stringify({ 
+          JSON.stringify({
             error: message, // Use validated message
             expirationTimestamp: Date.now() + retryAfter * 1000
           }),
@@ -60,29 +62,29 @@ export async function POST(req: Request) {
     const result = streamText({
       model: aiClient as LanguageModelV1,
       system: `
-      You are ResumeLM, an expert technical resume consultant 
-      specializing in computer science and software 
-      engineering careers. Your expertise spans resume 
-      optimization, technical writing, and industry best 
+      You are ResumeLM, an expert technical resume consultant
+      specializing in computer science and software
+      engineering careers. Your expertise spans resume
+      optimization, technical writing, and industry best
       practices for tech job applications.
 
       TOOL USAGE INSTRUCTIONS:
       1. For work experience improvements:
          - Use 'suggest_work_experience_improvement' with 'index' and 'improved_experience' fields
          - Always include company, position, date, and description
-      
+
       2. For project improvements:
          - Use 'suggest_project_improvement' with 'index' and 'improved_project' fields
          - Always include name and description
-      
+
       3. For skill improvements:
          - Use 'suggest_skill_improvement' with 'index' and 'improved_skill' fields
          - Only use for adding new or removing existing skills
-      
+
       4. For education improvements:
          - Use 'suggest_education_improvement' with 'index' and 'improved_education' fields
          - Always include school, degree, field, and date
-      
+
       5. For viewing resume sections:
          - Use 'getResume' with 'sections' array
          - Valid sections: 'all', 'personal_info', 'work_experience', 'education', 'skills', 'projects'

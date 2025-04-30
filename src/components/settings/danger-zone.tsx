@@ -8,7 +8,8 @@ import { Loader2 } from "lucide-react"
 import { useFormStatus } from 'react-dom'
 import { deleteUserAccount } from '@/app/auth/login/actions'
 
-interface DangerZoneProps {}
+// No props needed for this component
+type DangerZoneProps = Record<string, never>
 
 function SubmitButton() {
   const { pending } = useFormStatus()

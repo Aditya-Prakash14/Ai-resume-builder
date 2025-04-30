@@ -39,7 +39,7 @@ export function ModelShowcase() {
                 </div>
                 <h3 className="font-bold text-lg mb-2">Claude</h3>
                 <div className="w-16 h-1 bg-gradient-to-r from-violet-500 to-purple-600 rounded-full mb-3"></div>
-                <p className="text-sm text-muted-foreground mb-4">Anthropic's helpful, harmless, and honest AI assistant</p>
+                <p className="text-sm text-muted-foreground mb-4">Anthropic&apos;s helpful, harmless, and honest AI assistant</p>
                 <div className="mt-auto flex items-center justify-center gap-1">
                   <span className="inline-block w-2 h-2 rounded-full bg-violet-500 animate-pulse"></span>
                   <span className="text-xs text-violet-600 font-medium">Integrated</span>
@@ -67,7 +67,7 @@ export function ModelShowcase() {
                 </div>
                 <h3 className="font-bold text-lg mb-2">Gemini</h3>
                 <div className="w-16 h-1 bg-gradient-to-r from-rose-500 to-pink-600 rounded-full mb-3"></div>
-                <p className="text-sm text-muted-foreground mb-4">Google's most capable and versatile AI model</p>
+                <p className="text-sm text-muted-foreground mb-4">Google&apos;s most capable and versatile AI model</p>
                 <div className="mt-auto flex items-center justify-center gap-1">
                   <span className="inline-block w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
                   <span className="text-xs text-rose-600 font-medium">Integrated</span>

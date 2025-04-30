@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { Code, Github, Linkedin, Mail, MapPin, Zap } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, Zap } from "lucide-react";
 
 export function MockResume() {
   return (

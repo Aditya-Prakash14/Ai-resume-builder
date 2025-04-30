@@ -59,11 +59,11 @@ function useTextProcessor() {
 }
 
 // Memoized section components
-const HeaderSection = memo(function HeaderSection({ 
-  resume, 
-  styles 
-}: { 
-  resume: Resume; 
+const HeaderSection = memo(function HeaderSection({
+  resume,
+  styles
+}: {
+  resume: Resume;
   styles: ReturnType<typeof createResumeStyles>;
 }) {
   return (
@@ -122,15 +122,15 @@ const HeaderSection = memo(function HeaderSection({
   );
 });
 
-const SkillsSection = memo(function SkillsSection({ 
-  skills, 
-  styles 
-}: { 
-  skills: Resume['skills']; 
+const SkillsSection = memo(function SkillsSection({
+  skills,
+  styles
+}: {
+  skills: Resume['skills'];
   styles: ReturnType<typeof createResumeStyles>;
 }) {
   if (!skills?.length) return null;
-  
+
   return (
     <View style={styles.skillsSection}>
       <Text style={styles.sectionTitle}>Skills</Text>
@@ -146,11 +146,11 @@ const SkillsSection = memo(function SkillsSection({
   );
 });
 
-const ExperienceSection = memo(function ExperienceSection({ 
-  experiences, 
-  styles 
-}: { 
-  experiences: Resume['work_experience']; 
+const ExperienceSection = memo(function ExperienceSection({
+  experiences,
+  styles
+}: {
+  experiences: Resume['work_experience'];
   styles: ReturnType<typeof createResumeStyles>;
 }) {
   const processText = useTextProcessor();
@@ -184,11 +184,11 @@ const ExperienceSection = memo(function ExperienceSection({
   );
 });
 
-const ProjectsSection = memo(function ProjectsSection({ 
-  projects, 
-  styles 
-}: { 
-  projects: Resume['projects']; 
+const ProjectsSection = memo(function ProjectsSection({
+  projects,
+  styles
+}: {
+  projects: Resume['projects'];
   styles: ReturnType<typeof createResumeStyles>;
 }) {
   const processText = useTextProcessor();
@@ -227,7 +227,7 @@ const ProjectsSection = memo(function ProjectsSection({
               </Text>
             )}
           </View>
-          
+
           {project.description.map((bullet, bulletIndex) => (
             <View key={bulletIndex} style={styles.bulletPoint}>
               <Text style={styles.bulletDot}>•</Text>
@@ -244,11 +244,11 @@ const ProjectsSection = memo(function ProjectsSection({
   );
 });
 
-const EducationSection = memo(function EducationSection({ 
-  education, 
-  styles 
-}: { 
-  education: Resume['education']; 
+const EducationSection = memo(function EducationSection({
+  education,
+  styles
+}: {
+  education: Resume['education'];
   styles: ReturnType<typeof createResumeStyles>;
 }) {
   const processText = useTextProcessor();
@@ -555,10 +555,12 @@ export const ResumePDFDocument = memo(function ResumePDFDocument({ resume }: Res
         <ExperienceSection experiences={resume.work_experience} styles={styles} />
         <ProjectsSection projects={resume.projects} styles={styles} />
         <EducationSection education={resume.education} styles={styles} />
-        
+
         {resume.document_settings?.show_ubc_footer && (
           <View style={styles.footer}>
-            <Image 
+            {/* UBC Science Footer image */}
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
+            <Image
               src="/images/ubc-science-footer.png"
               style={styles.footerImage}
             />
@@ -573,4 +575,4 @@ export const ResumePDFDocument = memo(function ResumePDFDocument({ resume }: Res
     prevProps.resume === nextProps.resume &&
     prevProps.variant === nextProps.variant
   );
-}); 
+});
