@@ -1,8 +1,4 @@
-# ResumeLM - AI-Powered Resume Builder
-
-Try it out at [resumelm.com](https://resumelm.com)!
-
-> 🚧 **Under Active Development** 
+# AI Resume Builder
 
 An intelligent, open-source resume builder powered by AI that helps create and tailor resumes for specific job applications. Built with Next.js 15, React 19, TypeScript, and Shadcn UI.
 
