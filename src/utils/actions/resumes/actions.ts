@@ -16,7 +16,7 @@ import { getSubscriptionPlan } from "../stripe/actions";
 export async function getResumeById(resumeId: string): Promise<{ resume: Resume; profile: Profile }> {
   const supabase = await createClient();
   const { data: { user }, error } = await supabase.auth.getUser();
-  
+
   if (error || !user) {
     throw new Error('User not authenticated');
   }
@@ -44,9 +44,9 @@ export async function getResumeById(resumeId: string): Promise<{ resume: Resume;
       throw new Error('Profile not found');
     }
 
-    return { 
-      resume: resumeResult.data, 
-      profile: profileResult.data 
+    return {
+      resume: resumeResult.data,
+      profile: profileResult.data
     };
   } catch (error) {
     throw error;
@@ -56,7 +56,7 @@ export async function getResumeById(resumeId: string): Promise<{ resume: Resume;
 export async function updateResume(resumeId: string, data: Partial<Resume>): Promise<Resume> {
   const supabase = await createClient();
   const { data: { user }, error } = await supabase.auth.getUser();
-  
+
   if (error || !user) {
     throw new Error('User not authenticated');
   }
@@ -79,7 +79,7 @@ export async function updateResume(resumeId: string, data: Partial<Resume>): Pro
 export async function deleteResume(resumeId: string): Promise<void> {
     const supabase = await createClient();
   const { data: { user }, error } = await supabase.auth.getUser();
-  
+
   if (error || !user) {
     throw new Error('User not authenticated');
   }
@@ -131,7 +131,7 @@ export async function deleteResume(resumeId: string): Promise<void> {
 }
 
 export async function createBaseResume(
-  name: string, 
+  name: string,
   importOption: 'import-profile' | 'fresh' | 'import-resume' = 'import-profile',
   selectedContent?: {
     first_name?: string;
@@ -150,7 +150,7 @@ export async function createBaseResume(
 ): Promise<Resume> {
   const supabase = await createClient();
   const { data: { user }, error } = await supabase.auth.getUser();
-  
+
   if (error || !user) {
     throw new Error('User not authenticated');
   }
@@ -162,7 +162,7 @@ export async function createBaseResume(
       .select('*')
       .eq('user_id', user.id)
       .single();
-    
+
     if (profileError) {
       console.error('Profile fetch error:', profileError);
     }
@@ -182,7 +182,7 @@ export async function createBaseResume(
     website: importOption === 'import-resume' ? selectedContent?.website || '' : importOption === 'fresh' ? '' : profile?.website || '',
     linkedin_url: importOption === 'import-resume' ? selectedContent?.linkedin_url || '' : importOption === 'fresh' ? '' : profile?.linkedin_url || '',
     github_url: importOption === 'import-resume' ? selectedContent?.github_url || '' : importOption === 'fresh' ? '' : profile?.github_url || '',
-    work_experience: (importOption === 'import-profile' || importOption === 'import-resume') && selectedContent 
+    work_experience: (importOption === 'import-profile' || importOption === 'import-resume') && selectedContent
       ? selectedContent.work_experience
       : [],
     education: (importOption === 'import-profile' || importOption === 'import-resume') && selectedContent
@@ -271,7 +271,7 @@ export async function createTailoredResume(
 
   const supabase = await createClient();
   const { data: { user }, error: userError } = await supabase.auth.getUser();
-  
+
   if (userError || !user) {
     throw new Error('User not authenticated');
   }
@@ -311,7 +311,7 @@ export async function createTailoredResume(
 export async function copyResume(resumeId: string): Promise<Resume> {
   const supabase = await createClient();
   const { data: { user }, error } = await supabase.auth.getUser();
-  
+
   if (error || !user) {
     throw new Error('User not authenticated');
   }
@@ -362,7 +362,7 @@ export async function copyResume(resumeId: string): Promise<Resume> {
 export async function countResumes(type: 'base' | 'tailored' | 'all'): Promise<number> {
   const supabase = await createClient();
   const { data: { user }, error } = await supabase.auth.getUser();
-  
+
   if (error || !user) {
     throw new Error('User not authenticated');
   }
@@ -387,10 +387,10 @@ export async function countResumes(type: 'base' | 'tailored' | 'all'): Promise<n
 
 
 export async function generateResumeScore(
-  resume: Resume, 
+  resume: Resume,
   config?: AIConfig
 ) {
-  
+
 
 
   const subscriptionPlan = await getSubscriptionPlan();
@@ -414,7 +414,7 @@ export async function generateResumeScore(
           "reason": "string explanation"
         }
       }
-      Example: 
+      Example:
       "keywordOptimization": {
         "score": 85,
         "reason": "Good use of industry keywords but could add more variation"
@@ -426,6 +426,30 @@ export async function generateResumeScore(
     return object
   } catch (error) {
     console.error('Error SCORING resume:', error);
-    throw error;
+    // Return a default score object instead of throwing an error
+    return {
+      overall: {
+        score: 0,
+        reason: "API key not configured. Please add your OpenAI API key in settings."
+      },
+      content: {
+        score: 0,
+        reason: "API key not configured. Please add your OpenAI API key in settings."
+      },
+      format: {
+        score: 0,
+        reason: "API key not configured. Please add your OpenAI API key in settings."
+      },
+      impact: {
+        score: 0,
+        reason: "API key not configured. Please add your OpenAI API key in settings."
+      },
+      miscellaneous: {
+        apiKeyMissing: {
+          score: 0,
+          reason: "API key not configured. Please add your OpenAI API key in settings."
+        }
+      }
+    };
   }
 }

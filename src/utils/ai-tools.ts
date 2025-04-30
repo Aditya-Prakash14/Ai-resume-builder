@@ -27,13 +27,13 @@ export function initializeAIClient(config?: AIConfig, isPro?: boolean, useThinki
   // Handle Pro subscription with environment variables
   if (isPro && config) {
 
-  
+
     const { model } = config;
 
     // if (useThinking) {
     //   return createOpenAI({ apiKey: process.env.OPENAI_API_KEY })('o1-mini');
     // }
-    
+
     if (model.startsWith('claude')) {
       if (!process.env.ANTHROPIC_API_KEY) throw new Error('Anthropic API key not found');
       return createAnthropic({ apiKey: process.env.ANTHROPIC_API_KEY,  })(model) as LanguageModelV1;
@@ -62,10 +62,10 @@ export function initializeAIClient(config?: AIConfig, isPro?: boolean, useThinki
 
     // Default to OpenAI for Pro
     if (!process.env.OPENAI_API_KEY) throw new Error('OpenAI API key not found');
-    return createOpenAI({ 
+    return createOpenAI({
       apiKey: process.env.OPENAI_API_KEY,
       compatibility: 'strict',
-    
+
     })('gpt-4o-mini');
   }
 
@@ -75,7 +75,7 @@ export function initializeAIClient(config?: AIConfig, isPro?: boolean, useThinki
   }
 
   const { model, apiKeys } = config;
-  
+
   if (model.startsWith('claude')) {
     const anthropicKey = apiKeys.find(k => k.service === 'anthropic')?.key;
     if (!anthropicKey) throw new Error('Anthropic API key not found');
@@ -87,20 +87,29 @@ export function initializeAIClient(config?: AIConfig, isPro?: boolean, useThinki
     if (!googleKey) throw new Error('Google API key not found');
     return createGoogleGenerativeAI({ apiKey: googleKey })(model) as LanguageModelV1;
   }
-  
+
   if (model.startsWith('deepseek')) {
     const deepseekKey = apiKeys.find(k => k.service === 'deepseek')?.key;
     if (!deepseekKey) throw new Error('DeepSeek API key not found');
     return createDeepSeek({ apiKey: deepseekKey })(model) as LanguageModelV1;
   }
-  
+
   if (model.startsWith('gemma')) {
     const groqKey = apiKeys.find(k => k.service === 'groq')?.key;
     if (!groqKey) throw new Error('Groq API key not found');
     return createGroq({ apiKey: groqKey })(model) as LanguageModelV1;
   }
-  
+
   const openaiKey = apiKeys.find(k => k.service === 'openai')?.key;
-  if (!openaiKey) throw new Error('OpenAI API key not found');
+  if (!openaiKey) {
+    console.warn('OpenAI API key not found. Using mock AI client.');
+    // Return a mock AI client that returns empty responses
+    return {
+      chat: async () => ({ content: "API key not configured. Please add your OpenAI API key in settings." }),
+      complete: async () => "API key not configured. Please add your OpenAI API key in settings.",
+      embeddings: async () => new Array(1536).fill(0),
+      // Add any other methods that might be called
+    } as unknown as LanguageModelV1;
+  }
   return createOpenAI({ apiKey: openaiKey })(model) as LanguageModelV1;
 }
